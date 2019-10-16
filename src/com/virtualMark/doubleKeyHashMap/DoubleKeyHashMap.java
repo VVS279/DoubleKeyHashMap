@@ -86,7 +86,11 @@ public class DoubleKeyHashMap<T1, T2, T3> {
 	public Iterator<Pair<T1, T2>> iterator(){
 		return this.keySet().iterator();
 	}
-
+    	
+	public T3 computeIfAbsent(T1 key1, T2 key2, BiFunction<T1,T2,T3> value) {
+        	return this.hashMap.computeIfAbsent(new Pair<>(key1,key2), (k) -> value.apply(key1,key2));
+    	}
+	
 	@Override
 	public String toString() {
 		StringBuffer stringBuffer = new StringBuffer("{\n");
